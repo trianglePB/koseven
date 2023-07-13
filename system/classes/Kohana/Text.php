@@ -422,7 +422,7 @@ class Kohana_Text {
 	public static function auto_p($str, $br = TRUE)
 	{
 		// Trim whitespace
-		if (($str = trim($str)) === '')
+		if (($str = trim($str ?? '')) === '')
 			return '';
 
 		// Standardize newlines
