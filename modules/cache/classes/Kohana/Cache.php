@@ -306,7 +306,11 @@ abstract class Kohana_Cache {
      */
     protected function _sanitize_id($id)
     {
-
+	if (is_null($id))
+	{
+		$id = '';
+	}
+	
         // adding cache prefix to avoid duplicates
         $prefix = '';
         // configuration for the specific cache group

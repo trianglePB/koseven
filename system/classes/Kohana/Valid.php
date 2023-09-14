@@ -433,15 +433,21 @@ class Kohana_Valid {
 	 * Checks whether a string is a valid number (negative and decimal numbers allowed).
 	 *
 	 * Uses {@link http://www.php.net/manual/en/function.localeconv.php locale conversion}
-	 * to allow decimal point to be locale specific.
+	 * to allow decimal point to be locale specific (when used in PHP version < 8.0)
+	 * {@link https://php.watch/versions/8.0/float-to-string-locale-independent more info}
 	 *
 	 * @param   string  $str    input string
 	 * @return  boolean
 	 */
 	public static function numeric($str)
 	{
-		// Get the decimal point for the current locale
-		list($decimal) = array_values(localeconv());
+		if (version_compare(phpversion(), '8.0.0', '<')) {
+			// Get the decimal point for the current locale
+			list($decimal) = array_values(localeconv());
+		} else {
+			// Since PHP 8 the decimal separator is locale independent
+			$decimal = '.';
+		}
 
 		// A lookahead is used to make sure the string contains at least one digit (before or after the decimal point)
 		return (bool) preg_match('/^-?+(?=.*[0-9])[0-9]*+'.preg_quote($decimal).'?+[0-9]*+$/D', (string) $str);

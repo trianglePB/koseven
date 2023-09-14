@@ -325,7 +325,6 @@ class Kohana_UTF8 {
 	public static function strtolower($str)
 	{
 		$str = $str ?? '';
-
 		if (UTF8::$server_utf8)
 			return mb_strtolower($str, Kohana::$charset);
 
