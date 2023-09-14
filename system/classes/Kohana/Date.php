@@ -279,9 +279,31 @@ class Kohana_Date {
 
 		if ($format === Date::MONTHS_LONG OR $format === Date::MONTHS_SHORT)
 		{
-			for ($i = 1; $i <= 12; ++$i)
+			if ( version_compare(PHP_VERSION, '8.1', '<') )
 			{
-				$months[$i] = strftime($format, mktime(0, 0, 0, $i, 1));
+				$parser = function($time) use ($format) {
+					return strftime($format, $time);
+				};
+			}
+			elseif ( extension_loaded('intl') )
+			{
+				$parser = function($time) use ($format)
+				{
+					$formatter = new \IntlDateFormatter(null);
+					$formatter->setPattern($format === Date::MONTHS_LONG ? 'MMMM' : 'MMM');
+					return $formatter->format($time);
+				};
+			} 
+			else 
+			{
+				$parser = function($time) use ($format)
+				{
+					return date($format === Date::MONTHS_LONG ? 'F' : 'M', $time);
+				};
+			}
+			for ( $i = 1; $i <= 12; ++$i )
+			{
+				$months[$i] = $parser(mktime(0, 0, 0, $i, 1));
 			}
 		}
 		else
