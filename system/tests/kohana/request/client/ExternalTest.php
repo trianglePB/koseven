@@ -46,7 +46,7 @@ class Kohana_Request_Client_ExternalTest extends Unittest_TestCase {
 			];
 		}
 
-		if (extension_loaded('http'))
+		if (extension_loaded('http') && function_exists('http_support'))
 		{
 			$return[] = [
 				[],
