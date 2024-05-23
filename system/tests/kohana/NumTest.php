@@ -117,7 +117,6 @@ class Kohana_NumTest extends Unittest_TestCase
 	}
 
 	/**
-	 * @todo test locales
 	 * @test
 	 * @dataProvider provider_format
 	 * @param integer $number
@@ -127,6 +126,7 @@ class Kohana_NumTest extends Unittest_TestCase
 	 */
 	public function test_format($number, $places, $monetary, $expected)
 	{
+		//TODO test locales
 		$this->assertSame($expected, Num::format($number, $places, $monetary));
 	}
 
