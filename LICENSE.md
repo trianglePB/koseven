@@ -60,7 +60,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # MIT License Agreement
 MIT License
 Сopyright (c) 2015 Kohana Team
-Copyright (c) 2016-2024 Koseven Team  
+Copyright (c) 2016-2024 Koseven Team
+Copyright (C) 2004-2017 Alex Gorbatchev (SyntaxHighlighter modules/userguide/media/guide/css/shThemeKodoc.css). 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
