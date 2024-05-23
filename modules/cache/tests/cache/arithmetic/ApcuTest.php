@@ -24,8 +24,8 @@ class Kohana_ApcuTest extends Kohana_CacheArithmeticMethodsTest {
      *
      * @return  void
      */
-    public function setUp()
-    {
+    public function setUp(): void
+	{
         parent::setUp();
 
         if ( ! extension_loaded('apcu'))

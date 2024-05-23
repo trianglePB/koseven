@@ -12,7 +12,7 @@ include_once(Kohana::find_file('tests/cache', 'CacheBasicMethodsTest'));
  */
 abstract class Kohana_CacheArithmeticMethodsTest extends Kohana_CacheBasicMethodsTest {
 
-	public function tearDown()
+	public function tearDown(): void
 	{
 		parent::tearDown();
 

@@ -45,13 +45,13 @@ abstract class Kohana_Unittest_Database_TestCase extends TestCase{
 	 * Extending classes that have their own setUp() should call
 	 * parent::setUp()
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->_helpers = new Kohana_Unittest_Helpers;
 
 		$this->setEnvironment($this->environmentDefault);
 
-		return parent::setUp();
+		parent::setUp();
 	}
 
 	/**
@@ -60,11 +60,11 @@ abstract class Kohana_Unittest_Database_TestCase extends TestCase{
 	 * Extending classes that have their own tearDown()
 	 * should call parent::tearDown()
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		$this->_helpers->restore_environment();
 
-		return parent::tearDown();
+		parent::tearDown();
 	}
 
 	/**

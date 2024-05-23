@@ -19,8 +19,8 @@ class Kohana_RequestTest extends Unittest_TestCase
 	protected $_inital_request;
 
 	// @codingStandardsIgnoreStart
-	public function setUp()
-	// @codingStandardsIgnoreEnd
+	public function setUp(): void
+		// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
 		Kohana::$config->load('url')->set('trusted_hosts', ['localhost']);
@@ -29,8 +29,8 @@ class Kohana_RequestTest extends Unittest_TestCase
 	}
 
 	// @codingStandardsIgnoreStart
-	public function tearDown()
-	// @codingStandardsIgnoreEnd
+	public function tearDown(): void
+		// @codingStandardsIgnoreEnd
 	{
 		Request::$initial = $this->_initial_request;
 		parent::tearDown();

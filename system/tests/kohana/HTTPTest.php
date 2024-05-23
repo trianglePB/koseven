@@ -21,8 +21,8 @@ class Kohana_HTTPTest extends Unittest_TestCase {
 	 * Sets up the environment
 	 */
 	// @codingStandardsIgnoreStart
-	public function setUp()
-	// @codingStandardsIgnoreEnd
+	public function setUp(): void
+		// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
 		Kohana::$config->load('url')->set('trusted_hosts', ['www\.example\.com']);
@@ -34,8 +34,8 @@ class Kohana_HTTPTest extends Unittest_TestCase {
 	 * Tears down whatever is setUp
 	 */
 	// @codingStandardsIgnoreStart
-	public function tearDown()
-	// @codingStandardsIgnoreEnd
+	public function tearDown(): void
+		// @codingStandardsIgnoreEnd
 	{
 		Request::$initial = $this->_initial_request;
 		parent::tearDown();

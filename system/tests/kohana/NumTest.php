@@ -21,8 +21,8 @@ class Kohana_NumTest extends Unittest_TestCase
 	 * SetUp test enviroment
 	 */
 	// @codingStandardsIgnoreStart
-	public function setUp()
-	// @codingStandardsIgnoreEnd
+	public function setUp(): void
+		// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
 
@@ -34,8 +34,8 @@ class Kohana_NumTest extends Unittest_TestCase
 	 * Tear down environment
 	 */
 	// @codingStandardsIgnoreStart
-	public function tearDown()
-	// @codingStandardsIgnoreEnd
+	public function tearDown(): void
+		// @codingStandardsIgnoreEnd
 	{
 		parent::tearDown();
 
