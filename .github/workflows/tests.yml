@@ -5,9 +5,13 @@
   jobs:
     test:
       runs-on: ubuntu-latest
-
       services:
+        memcached:
+          image: memcached:1.6-alpine
+          ports:
+            - 11211:11211
         redis:
+
           image: redis:5.0
           ports:
             - 6379:6379
@@ -29,7 +33,7 @@
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis, memcached, http
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis, memcache, memcached, http, apcu
           tools: composer:v2
           coverage: none
 
