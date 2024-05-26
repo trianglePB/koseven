@@ -1,0 +1,61 @@
+  name: tests
+
+  on: [push,pull_request]
+
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+
+      services:
+        redis:
+          image: redis:5.0
+          ports:
+            - 6379:6379
+          options: --entrypoint redis-server
+
+      strategy:
+        fail-fast: true
+        matrix:
+          php: ['7.2', '7.3', '7.4', '8.0']
+          stability: [prefer-lowest, prefer-stable]
+
+      name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis, memcached
+          tools: composer:v2
+          coverage: none
+
+      - name: Set Minimum Guzzle Version
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer require guzzlehttp/guzzle:^7.2 --no-interaction --no-update
+        if: matrix.php >= 8
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
+#        env:
+#        - name: Mount Directories and run Docker-Machine
+#          run: docker run -dtP --name unittest -v /home/runner/work/koseven/koseven:/tmp/koseven/ koseven/docker:travis-devel
+#
+#        - name: Install composer dependencies
+#          run: docker exec unittest /bin/sh -c "service redis-server start; cd /tmp/koseven; composer install"
+#
+#        - name: Run Koseven Unittest(s)
+#          run: docker exec unittest /bin/sh -c "cd /tmp/koseven; php vendor/bin/phpunit"
