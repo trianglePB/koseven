@@ -334,7 +334,7 @@ class Kohana_Cache_Memcache extends Cache implements Cache_Arithmetic {
 	 */
 	public function increment($id, $step = 1)
 	{
-		return $this->_memcache->increment($id, $step);
+		return $this->_memcache->increment($this->_sanitize_id($id), $step);
 	}
 
 	/**
@@ -349,6 +349,6 @@ class Kohana_Cache_Memcache extends Cache implements Cache_Arithmetic {
 	 */
 	public function decrement($id, $step = 1)
 	{
-		return $this->_memcache->decrement($id, $step);
+		return $this->_memcache->decrement($this->_sanitize_id($id), $step);
 	}
 }
