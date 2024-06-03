@@ -6,7 +6,7 @@
 		beStrictAboutCoversAnnotation="false"
 		beStrictAboutOutputDuringTests="true"
 		beStrictAboutTodoAnnotatedTests="true"
-		stopOnFailure="true"
+		stopOnFailure="false"
 		verbose="false">
 	<testsuite name="default">
 		<directory suffix="tests.php">modules/unittest/</directory>
