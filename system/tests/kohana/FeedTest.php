@@ -21,8 +21,8 @@ class Kohana_FeedTest extends Unittest_TestCase
 	 * Sets up the environment
 	 */
 	// @codingStandardsIgnoreStart
-	public function setUp()
-	// @codingStandardsIgnoreEnd
+	public function setUp(): void
+		// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
 		Kohana::$config->load('url')->set('trusted_hosts', ['localhost']);

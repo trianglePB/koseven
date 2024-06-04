@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Framework\SelfDescribing;
+use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  * @copyright  (c) 2016-2018 Koseven Team
  * @license    https://koseven.ga/LICENSE.md
  */
-abstract class Kohana_Unittest_TestCase extends TestCase {
+abstract class Kohana_Unittest_TestCase extends TestCase  implements SelfDescribing, Test {
 	
 	/**
 	 * Make sure PHPUnit backs up globals
@@ -41,7 +43,7 @@ abstract class Kohana_Unittest_TestCase extends TestCase {
 	 * 
 	 * @codeCoverageIgnore
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->_helpers = new Unittest_Helpers;
 
@@ -56,7 +58,7 @@ abstract class Kohana_Unittest_TestCase extends TestCase {
 	 * 
 	 * @codeCoverageIgnore
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		$this->_helpers->restore_environment();
 	}

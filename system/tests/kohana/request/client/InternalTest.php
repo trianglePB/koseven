@@ -21,8 +21,8 @@ class Kohana_Request_Client_InternalTest extends Unittest_TestCase
 	protected $_log_object;
 
 	// @codingStandardsIgnoreStart
-	public function setUp()
-	// @codingStandardsIgnoreEnd
+	public function setUp(): void
+		// @codingStandardsIgnoreEnd
 	{
 		parent::setUp();
 
@@ -32,8 +32,8 @@ class Kohana_Request_Client_InternalTest extends Unittest_TestCase
 	}
 
 	// @codingStandardsIgnoreStart
-	public function tearDown()
-	// @codingStandardsIgnoreEnd
+	public function tearDown(): void
+		// @codingStandardsIgnoreEnd
 	{
 		// re-assign log object
 		Kohana::$log = $this->_log_object;

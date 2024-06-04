@@ -27,7 +27,7 @@ abstract class Kohana_CacheBasicMethodsTest extends Unittest_TestCase {
 	 *
 	 * @return  void
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 	}

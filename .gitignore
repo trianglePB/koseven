@@ -15,3 +15,5 @@ composer.lock
 
 # Coverage reports
 /build/logs/
+/.phpunit.result.cache
+/memory

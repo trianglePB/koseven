@@ -19,7 +19,7 @@ class Kohana_EncryptTest extends Unittest_TestCase
 	/**
 	 * Prepare test, skip if extension not avaliable.
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		

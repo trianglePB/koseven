@@ -89,16 +89,15 @@ class Kohana_Cache_Apcu extends Cache implements Cache_Arithmetic {
 	 *
 	 * @param   string   $id        id of cache entry
 	 * @param   string   $data      data to set to cache
-	 * @param   integer  $lifetime  lifetime in seconds
+	 * @param   ?integer  $lifetime  lifetime in seconds
 	 * @return  boolean
 	 */
 	public function set($id, $data, $lifetime = NULL)
 	{
-		if ($lifetime === NULL)
+		if (is_null($lifetime))
 		{
 			$lifetime = Arr::get($this->_config, 'default_expire', Cache::DEFAULT_EXPIRE);
 		}
-
 		return apcu_store($this->_sanitize_id($id), $data, $lifetime);
 	}
 
@@ -138,15 +137,15 @@ class Kohana_Cache_Apcu extends Cache implements Cache_Arithmetic {
 	 * Useful for shared counters and other persistent integer based
 	 * tracking.
 	 *
-	 * @param   string    id of cache entry to increment
-	 * @param   int       step value to increment by
-	 * @return  integer
-	 * @return  boolean
+	 * @param   string    $id of cache entry to increment
+	 * @param   int       $step value to increment by
+	 * @return  integer|boolean
 	 */
 	public function increment($id, $step = 1)
 	{
-		if (apcu_exists($id)) {
-			return apcu_inc($id, $step);
+
+		if (apcu_exists($this->_sanitize_id($id))) {
+			return apcu_inc($this->_sanitize_id($id), $step);
 		} else {
 			return FALSE;
 		}
@@ -157,15 +156,15 @@ class Kohana_Cache_Apcu extends Cache implements Cache_Arithmetic {
 	 * Useful for shared counters and other persistent integer based
 	 * tracking.
 	 *
-	 * @param   string    id of cache entry to decrement
-	 * @param   int       step value to decrement by
+	 * @param   string    $id of cache entry to decrement
+	 * @param   int       $step value to decrement by
 	 * @return  integer
 	 * @return  boolean
 	 */
 	public function decrement($id, $step = 1)
 	{
-		if (apcu_exists($id)) {
-			return apcu_dec($id, $step);
+		if (apcu_exists($this->_sanitize_id($id))) {
+			return apcu_dec($this->_sanitize_id($id), $step);
 		} else {
 			return FALSE;
 		}

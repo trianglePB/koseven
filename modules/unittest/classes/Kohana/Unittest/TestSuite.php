@@ -26,16 +26,11 @@ abstract class Kohana_Unittest_TestSuite extends TestSuite
 	];
 
 	/**
-     * Runs the tests and collects their result in a TestResult.
-     *
-     * @param  PHPUnit_Framework_TestResult $result
-     * @param  mixed                        $filter
-     * @param  array                        $groups
-     * @param  array                        $excludeGroups
-     * @param  boolean                      $processIsolation
-     * @return PHPUnit_Framework_TestResult
-     * @throws InvalidArgumentException
-     */
+	 * Runs the tests and collects their result in a TestResult.
+	 *
+	 * @param TestResult|null $result
+	 * @return TestResult
+	 */
     public function run(TestResult $result = NULL): TestResult
     {
 		// Get the code coverage filter from the suite's result object
@@ -54,7 +49,7 @@ abstract class Kohana_Unittest_TestSuite extends TestSuite
 				}
 			}
 		}
-		
+
 		return parent::run($result);
 	}
 
@@ -62,7 +57,7 @@ abstract class Kohana_Unittest_TestSuite extends TestSuite
 	 * Queues a file to be added to the code coverage whitelist when the suite runs
 	 * @param string $file 
 	 */
-	public function addFileToWhitelist($file)
+	public function addFileToWhitelist(string $file)
 	{
 		$this->_filter_calls['addFileToWhitelist'][] = $file;
 	}

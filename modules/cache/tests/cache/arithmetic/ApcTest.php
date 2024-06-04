@@ -24,7 +24,7 @@ class Kohana_ApcTest extends Kohana_CacheArithmeticMethodsTest {
 	 *
 	 * @return  void
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
