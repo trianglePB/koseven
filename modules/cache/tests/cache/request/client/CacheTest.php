@@ -1,4 +1,7 @@
 <?php
+
+use PHPUnit\Framework\MockObject\MockObject;
+
 /**
  * Unit tests for request client cache logic
  *
@@ -247,12 +250,22 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 
 	/**
 	 * Returns a mock object for Cache
-	 *
-	 * @return Cache
+	 * @return MockObject
+	 * @throws ReflectionException
 	 */
-	protected function _get_cache_mock()
+	protected function _get_cache_mock(): MockObject
 	{
-		return $this->createMock('Cache_File');
+		return $this->getMockForAbstractClass('Cache_File',
+			[[]],
+			'',
+			FALSE,
+			true,
+			true,
+			[
+				'get',
+				'set'
+			]
+		);
 	}
 } // End Kohana_Request_Client_CacheTest
 

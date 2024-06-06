@@ -133,7 +133,7 @@ class Kohana_Config_GroupTest extends TestCase
 	 */
 	public function test_writes_changes_to_config()
 	{
-		$mock  = $this->createMock('Kohana_Config', ['_write_config']);
+		$mock  = $this->createPartialMock('Kohana_Config', ['_write_config']);
 
 		$mock
 			->expects($this->exactly(3))
