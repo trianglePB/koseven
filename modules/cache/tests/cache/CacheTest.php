@@ -150,8 +150,14 @@ class Kohana_CacheTest extends Unittest_TestCase {
 	 */
 	public function test_config($key, $value, $expected_result, array $expected_config)
 	{
-		$cache = $this->createMock('Cache_File');
-
+		$cache = $this->getMockForAbstractClass('Cache_File',
+			[],
+			'',
+			FALSE,
+			true,
+			true,
+			[]
+		);
 		$cache_reflection = new ReflectionClass('Cache_File');
 		$config = $cache_reflection->getMethod('config');
 
@@ -192,8 +198,19 @@ class Kohana_CacheTest extends Unittest_TestCase {
 	 */
 	public function test_sanitize_id($id, $expected)
 	{
-		$cache = $this->createMock('Cache');
-
+		$cache = $this->getMockForAbstractClass('Cache',
+			[[]],
+			'',
+			FALSE,
+			true,
+			true,
+			[
+				'get',
+				'set',
+				'delete',
+				'delete_all'
+			]
+		);
 		$cache_reflection = new ReflectionClass('Cache');
 		$sanitize_id = $cache_reflection->getMethod('_sanitize_id');
 		$sanitize_id->setAccessible(TRUE);

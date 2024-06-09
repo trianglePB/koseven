@@ -113,7 +113,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 
 		// To get around this we have to specify a totally random name for the second mock object
 		$reader1 = $this->createMock('Kohana_Config_Reader');
-		$reader2 = $this->createMock('Kohana_Config_Reader', [], [], 'MY_AWESOME_READER');
+		$reader2 = $this->getMockForAbstractClass('Kohana_Config_Reader', [], 'MY_AWESOME_READER');
 
 		$config->attach($reader1);
 		$config->attach($reader2);
@@ -155,7 +155,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Config;
 
-		$reader = $this->createMock('Kohana_Config_Reader', ['load']);
+		$reader = $this->createPartialMock('Kohana_Config_Reader', ['load']);
 
 		$reader
 			->expects($this->once())
@@ -180,7 +180,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Config;
 
-		$reader = $this->createMock('Kohana_Config_Reader', ['load']);
+		$reader = $this->createPartialMock('Kohana_Config_Reader', ['load']);
 
 		$reader
 			->expects($this->once())
@@ -261,8 +261,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 		$config = new Kohana_Config;
 
 		$reader1 = $this->createMock('Kohana_Config_Reader');
-		$writer1 = $this->createMock('Kohana_Config_Writer', ['write']);
-		$writer2 = $this->createMock('Kohana_Config_Writer', ['write']);
+		$writer1 = $this->createPartialMock('Kohana_Config_Writer', ['write']);
+		$writer2 = $this->createPartialMock('Kohana_Config_Writer', ['write']);
 
 		$writer1
 			->expects($this->once())
@@ -290,9 +290,20 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$group_name =  'lolumns';
 
-		$reader1 = $this->createMock('Kohana_Config_Reader', ['load'], [], 'Unittest_Config_Reader_1');
-		$reader2 = $this->createMock('Kohana_Config_Reader', ['load'], [], 'Unittest_Config_Reader_2');
-
+		$reader1 = $this->getMockForAbstractClass('Kohana_Config_Reader', [],
+			'Unittest_Config_Reader_1',
+			true,
+			true,
+			true,
+			['load']
+		);
+		$reader2 = $this->getMockForAbstractClass('Kohana_Config_Reader', [],
+			'Unittest_Config_Reader_2',
+			true,
+			true,
+			true,
+			['load']
+		);
 		$reader1
 			->expects($this->once())
 			->method('load')
@@ -335,7 +346,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	 */
 	public function test_load_reuses_config_groups()
 	{
-		$reader = $this->createMock('Kohana_Config_Reader', ['load']);
+		$reader = $this->createPartialMock('Kohana_Config_Reader', ['load']);
 		$reader
 			->expects($this->once())
 			->method('load')
@@ -362,8 +373,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 	{
 		$config = new Kohana_Config;
 
-		$reader1 = $this->createMock('Kohana_Config_Reader', ['load']);
-		$reader2 = $this->createMock('Kohana_Config_Reader', ['load']);
+		$reader1 = $this->createPartialMock('Kohana_Config_Reader', ['load']);
+		$reader2 = $this->createPartialMock('Kohana_Config_Reader', ['load']);
 
 		$reader1
 			->expects($this->once())
@@ -377,8 +388,8 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->with('something')
 			->will($this->returnValue(['kohana' => 'good']));
 
-		$writer1 = $this->createMock('Kohana_Config_Writer', ['write']);
-		$writer2 = $this->createMock('Kohana_Config_Writer', ['write']);
+		$writer1 = $this->createPartialMock('Kohana_Config_Writer', ['write']);
+		$writer2 = $this->createPartialMock('Kohana_Config_Writer', ['write']);
 
 		// Due to crazy limitations in phpunit's mocking engine we have to be fairly
 		// liberal here as to what order we receive the config items
