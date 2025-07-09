@@ -157,7 +157,7 @@ class Kohana_URL {
 		}
 		
 		// Chop off possible scheme, host, port, user and pass parts
-		$path = preg_replace('~^[-a-z0-9+.]++://[^/]++/?~', '', trim($uri, '/'));
+		$path = preg_replace('~^[-a-z0-9+.]++://[^/]++/?~', '', trim((string) $uri, '/'));
 
 		if ( ! UTF8::is_ascii($path))
 		{
